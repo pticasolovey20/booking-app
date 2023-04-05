@@ -6,7 +6,7 @@ export const ButtonComponent = ({ buttons, button, index }) => {
 		<button
 			className={
 				index === buttons.length - 1
-					? "bg-primary p-1 rounded-full"
+					? "bg-secondary p-1 rounded-full"
 					: "border-r border-gray-300 px-2 text-white"
 			}
 		>

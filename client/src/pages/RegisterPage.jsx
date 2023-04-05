@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { styles } from "../styles/styles";
+
 export const RegisterPage = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -16,21 +18,21 @@ export const RegisterPage = () => {
 				<h1 className="text-4xl text-center">Register</h1>
 				<form className="max-w-md mx-auto mt-4" onSubmit={handleSubmit}>
 					<input
-						className="w-full border my-2 py-2 px-3 rounded-2xl"
+						className={styles.input}
 						type="text"
 						placeholder="Jhon Doe"
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
 					<input
-						className="w-full border my-2 py-2 px-3 rounded-2xl"
+						className={styles.input}
 						type="email"
 						placeholder="your@email.com"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
-						className="w-full border my-2 py-2 px-3 rounded-2xl"
+						className={styles.input}
 						type="password"
 						placeholder="password"
 						value={password}
