@@ -1,0 +1,7 @@
+[submodule "client"]
+    path = client
+    url = https://github.com/pticasolovey20/booking-app-client.git
+
+[submodule "server"]
+    path = server
+    url = https://github.com/pticasolovey20/booking-app-server.git
