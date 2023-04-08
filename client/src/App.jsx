@@ -1,6 +1,6 @@
+import { useDispatch } from "react-redux";
+import { fetchUser } from "./store/slices/userSlice";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserAction } from "./store/slices/userSlice";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
@@ -20,15 +20,10 @@ axios.defaults.baseURL = "http://localhost:4000";
 axios.defaults.withCredentials = true;
 
 export const App = () => {
-	const { user } = useSelector((state) => state.userReducer);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (Object.keys(user).length === 0) {
-			axios.get("/profile").then((data) => {
-				dispatch(setUserAction(data.data));
-			});
-		}
+		dispatch(fetchUser());
 	}, []);
 
 	return (

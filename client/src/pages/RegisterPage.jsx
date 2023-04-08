@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../store/slices/userSlice";
+
+import { Link, Navigate } from "react-router-dom";
 
 import { styles } from "../styles/styles";
 
@@ -8,21 +10,26 @@ export const RegisterPage = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPasssword] = useState("");
+	const [redirect, setRedirect] = useState(false);
+
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		try {
-			await axios.post("/register", {
+		dispatch(
+			registerUser({
 				name,
 				email,
 				password,
-			});
-			alert("Success");
-		} catch (error) {
-			alert("Error");
-		}
+			})
+		);
+		setRedirect(true);
 	};
+
+	if (redirect) {
+		return <Navigate to={"/login"} />;
+	}
 
 	return (
 		<div className="mt-4 grow flex items-center justify-around">

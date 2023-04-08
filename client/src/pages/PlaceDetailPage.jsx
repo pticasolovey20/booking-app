@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPlaceById } from "../store/slices/placesSlice";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 import { GalleryDetailComponent } from "../components/gallery-detail";
 import { PlaceGalleryComponent } from "../components/place-gallery";
@@ -11,18 +12,17 @@ import { ActionButtonComponent } from "../components/action-button";
 import { generateRandomNumber } from "../utils/randomNumber";
 
 export const PlaceDetailPage = () => {
+	const dispatch = useDispatch();
+	const { place, showAllPhotos } = useSelector((state) => state.placesReducer);
+
 	const { id } = useParams();
-	const [place, setPlace] = useState([]);
-	const [showAllPhotos, setShowAllPhotos] = useState(false);
 
 	useEffect(() => {
-		axios.get(`/places/${id}`).then((response) => {
-			setPlace(response.data);
-		});
+		dispatch(fetchPlaceById(id));
 	}, [id]);
 
 	if (showAllPhotos) {
-		return <GalleryDetailComponent place={place} handleClick={() => setShowAllPhotos(false)} />;
+		return <GalleryDetailComponent />;
 	}
 
 	return (
@@ -44,7 +44,7 @@ export const PlaceDetailPage = () => {
 						<ActionButtonComponent icon="heart" text="Save" />
 					</div>
 				</div>
-				<PlaceGalleryComponent place={place} handleClick={() => setShowAllPhotos(true)} />
+				<PlaceGalleryComponent />
 			</div>
 		</div>
 	);
