@@ -10,7 +10,11 @@ export const ButtonComponent = ({ buttons, button, index }) => {
 					: "border-r border-gray-300 px-2 text-white"
 			}
 		>
-			{index === buttons.length - 1 ? <SvgSelectorComponent icon={button} /> : button}
+			{index === buttons.length - 1 ? (
+				<SvgSelectorComponent icon={button} h={20} w={20} />
+			) : (
+				button
+			)}
 		</button>
 	);
 };

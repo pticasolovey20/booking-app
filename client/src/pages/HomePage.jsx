@@ -9,13 +9,14 @@ import { styles } from "../styles/styles";
 export const HomePage = () => {
 	const dispatch = useDispatch();
 	const { places } = useSelector((state) => state.placesReducer);
+	const { width } = useSelector((state) => state.widthReducer);
 
 	useEffect(() => {
 		dispatch(fetchAllPlaces());
 	}, []);
 
 	return (
-		<div className={`${styles.grid} gap-x-6 gap-y-10 mt-8`}>
+		<div className={`${styles.grid} gap-x-6 gap-y-10 mt-8 ${width < 767 && "pb-[80px]"}`}>
 			{places.length > 0 &&
 				places.map((place) => <PlaceItemComponent key={place._id} place={place} />)}
 		</div>
