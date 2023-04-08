@@ -1,4 +1,6 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import { setWidthAction } from "../../store/slices/widthSlice";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,13 +8,40 @@ import { WrapperComponent } from "../layout/Wrapper";
 import { SvgSelectorComponent } from "../svg-selector";
 import { ButtonComponent } from "../nav-button";
 
-import { buttons } from "../../constants";
+import { bottomMenu, buttons } from "../../constants";
 
 export const HeaderComponent = () => {
+	const dispatch = useDispatch();
+
 	const { user } = useSelector((state) => state.userReducer);
+	const { width } = useSelector((state) => state.widthReducer);
+
+	useEffect(() => {
+		const handleResize = () => dispatch(setWidthAction(window.innerWidth));
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, [dispatch]);
+
+	if (width < 768) {
+		return (
+			<div className="fixed right-0 bottom-0 z-10 flex items-center justify-around bg-primary py-4 px-2 min-w-full border-t-[1px] border-tertiary text-white text-sm">
+				{bottomMenu.map((button, index) => (
+					<button
+						key={index}
+						className="flex flex-col items-center gap-1"
+						onClick={() => console.log(button)}
+					>
+						<SvgSelectorComponent icon={button} h={28} w={28} />
+						{button}
+					</button>
+				))}
+			</div>
+		);
+	}
 
 	return (
-		<header className="flex justify-between">
+		<header className={`${width > 768 ? "flex" : "hidden"} justify-between`}>
 			<Link to="/" className="flex items-center gap-1">
 				<span className="font-bold text-2xl uppercase text-white">booking</span>
 			</Link>

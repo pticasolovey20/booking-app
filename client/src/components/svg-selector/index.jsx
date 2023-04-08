@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SvgSelectorComponent = ({ icon }) => {
+export const SvgSelectorComponent = ({ icon, w, h }) => {
 	switch (icon) {
 		case "logo":
 			return;
@@ -13,7 +13,8 @@ export const SvgSelectorComponent = ({ icon }) => {
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-4 h-4 text-white"
+					height={h}
+					width={w}
 				>
 					<path
 						strokeLinecap="round"
@@ -81,7 +82,8 @@ export const SvgSelectorComponent = ({ icon }) => {
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-6 h-6"
+					height={h}
+					width={w}
 				>
 					<path
 						strokeLinecap="round"
@@ -331,7 +333,8 @@ export const SvgSelectorComponent = ({ icon }) => {
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-6 h-6"
+					height={h}
+					width={w}
 				>
 					<path
 						strokeLinecap="round"
@@ -406,6 +409,25 @@ export const SvgSelectorComponent = ({ icon }) => {
 					className="w-6 h-6 hover:text-[#eb4034]"
 				>
 					<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			);
+
+		case "message":
+			return (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					strokeWidth={1.5}
+					stroke="currentColor"
+					height={h}
+					width={w}
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+					/>
 				</svg>
 			);
 

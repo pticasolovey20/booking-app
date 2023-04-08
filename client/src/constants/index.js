@@ -15,6 +15,8 @@ export const accountMenu = [
 	},
 ];
 
+export const bottomMenu = ["search", "heart", "heart", "message", "profile"];
+
 export const perksList = [
 	{
 		id: "wi-fi",
