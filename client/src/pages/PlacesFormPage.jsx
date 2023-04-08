@@ -1,25 +1,75 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-import { HeadlineComponent } from "../headline";
-import { ImageLinkComponent } from "../image-link";
-import { ImageDescComponent } from "../image-desc";
-import { PerkComponent } from "../perk";
+import { HeadlineComponent } from "../components/headline";
+import { ImageLinkComponent } from "../components/image-link";
+import { ImageDescComponent } from "../components/image-desc";
+import { PerkComponent } from "../components/perk";
 
-import { perksList } from "../../constants";
-import { styles } from "../../styles/styles";
+import { perksList } from "../constants";
+import { styles } from "../styles/styles";
 
-export const FormComponent = () => {
+export const PlacesFormPage = () => {
+	const { id } = useParams();
+
 	const [title, setTitle] = useState("");
 	const [address, setAddress] = useState("");
+	const [addedPhotos, setAddedPhotos] = useState([]);
 	const [description, setDescription] = useState("");
 	const [perks, setPerks] = useState([]);
 	const [extraInfo, setExtraInfo] = useState("");
 	const [chekIn, setCheckIn] = useState("");
 	const [chekOut, setCheckOut] = useState("");
 	const [maxGuests, setMaxGuests] = useState(1);
+	const [redirect, setRedirect] = useState("");
+
+	useEffect(() => {
+		if (!id) return;
+		axios.get("/places/", +id).then((response) => {
+			const { data } = response;
+			setTitle(data[0].title);
+			setAddress(data[0].address);
+			setAddedPhotos(data[0].photos);
+			setDescription(data[0].description);
+			setPerks(data[0].perks);
+			setExtraInfo(data[0].extraInfo);
+			setCheckIn(data[0].chekIn);
+			setCheckOut(data[0].chekOut);
+			setMaxGuests(data[0].maxGuests);
+		});
+	}, [id]);
+
+	const savePlace = async (event) => {
+		event.preventDefault();
+
+		const placeData = {
+			title,
+			address,
+			addedPhotos,
+			description,
+			perks,
+			extraInfo,
+			chekIn,
+			chekOut,
+			maxGuests,
+		};
+
+		if (id) {
+			await axios.put("/places", { id, ...placeData });
+			setRedirect("/account/places");
+		} else {
+			await axios.post("/places", placeData);
+			setRedirect("/account/places");
+		}
+	};
+
+	if (redirect) {
+		return <Navigate to={redirect} />;
+	}
 
 	return (
-		<form className="text-black">
+		<form className="text-black" onSubmit={savePlace}>
 			<HeadlineComponent
 				headText="Title"
 				subText="Title for your place. should be short and catchy as in advertisemen"
@@ -39,8 +89,8 @@ export const FormComponent = () => {
 				value={address}
 				onChange={(event) => setAddress(event.target.value)}
 			/>
-			<ImageLinkComponent />
-			<ImageDescComponent />
+			<ImageLinkComponent setAddedPhotos={setAddedPhotos} />
+			<ImageDescComponent addedPhotos={addedPhotos} setAddedPhotos={setAddedPhotos} />
 			<HeadlineComponent headText="Description" subText="description of the place" />
 			<textarea
 				className={styles.input}
