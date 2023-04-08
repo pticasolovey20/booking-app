@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { styles } from "../styles/styles";
@@ -10,6 +11,17 @@ export const RegisterPage = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		try {
+			await axios.post("/register", {
+				name,
+				email,
+				password,
+			});
+			alert("Success");
+		} catch (error) {
+			alert("Error");
+		}
 	};
 
 	return (
@@ -22,23 +34,23 @@ export const RegisterPage = () => {
 						type="text"
 						placeholder="Jhon Doe"
 						value={name}
-						onChange={(e) => setName(e.target.value)}
+						onChange={(event) => setName(event.target.value)}
 					/>
 					<input
 						className={styles.input}
 						type="email"
 						placeholder="your@email.com"
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(event) => setEmail(event.target.value)}
 					/>
 					<input
 						className={styles.input}
 						type="password"
 						placeholder="password"
 						value={password}
-						onChange={(e) => setPasssword(e.target.value)}
+						onChange={(event) => setPasssword(event.target.value)}
 					/>
-					<button className="w-full bg-primary p-2 text-white rounded-2xl">
+					<button className="w-full bg-secondary p-2 text-white rounded-2xl">
 						Register
 					</button>
 					<div className="text-center py-2 text-gray-500">

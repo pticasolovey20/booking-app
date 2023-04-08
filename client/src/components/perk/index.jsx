@@ -11,7 +11,12 @@ export const PerkComponent = ({ perk, selected, onChange }) => {
 
 	return (
 		<label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
-			<input type="checkbox" onChange={handleClick} name={perk.id} />
+			<input
+				checked={selected.includes(perk.id)}
+				type="checkbox"
+				onChange={handleClick}
+				name={perk.id}
+			/>
 			<SvgSelectorComponent icon={perk.id} />
 			<span>{perk.title}</span>
 		</label>

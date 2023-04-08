@@ -1,18 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { WrapperComponent } from "../layout/Wrapper";
 import { SvgSelectorComponent } from "../svg-selector";
-import { ButtonComponent } from "../button";
+import { ButtonComponent } from "../nav-button";
 
 import { buttons } from "../../constants";
 
 export const HeaderComponent = () => {
+	const { user } = useSelector((state) => state.userReducer);
+
 	return (
 		<header className="flex justify-between">
-			<a href="" className="flex items-center gap-1">
+			<Link to="/" className="flex items-center gap-1">
 				<span className="font-bold text-2xl uppercase text-white">booking</span>
-			</a>
+			</Link>
 			<WrapperComponent>
 				{buttons.map((button, index) => (
 					<ButtonComponent key={index} buttons={buttons} button={button} index={index} />
@@ -28,7 +31,7 @@ export const HeaderComponent = () => {
 				>
 					<SvgSelectorComponent icon="user" />
 				</Link>
-				<p className="text-lg font-medium text-white">Jhon Doe</p>
+				{!!user && <p className="text-lg font-medium text-white">{user.name}</p>}
 			</WrapperComponent>
 		</header>
 	);

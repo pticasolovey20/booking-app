@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { styles } from "../../styles/styles";
 
-export const ImageLinkComponent = () => {
+export const ImageLinkComponent = ({ setAddedPhotos }) => {
 	const [photoLink, setPhotoLink] = useState("");
 
 	const addPhotoByLink = async (event) => {
@@ -12,6 +12,7 @@ export const ImageLinkComponent = () => {
 		setAddedPhotos((prev) => {
 			return [...prev, filename];
 		});
+		setPhotoLink("");
 	};
 
 	return (
@@ -21,8 +22,9 @@ export const ImageLinkComponent = () => {
 				type="text"
 				placeholder="Add using link ...jpeg"
 				value={photoLink}
-				onChange={setPhotoLink}
+				onChange={(event) => setPhotoLink(event.target.value)}
 			/>
+
 			<button className="bg-secondary px-4" onClick={addPhotoByLink}>
 				Add photo
 			</button>
