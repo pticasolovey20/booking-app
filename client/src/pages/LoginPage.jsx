@@ -1,7 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUserAction } from "../store/slices/userSlice";
+import { loginUser } from "../store/slices/userSlice";
 import { Link, Navigate } from "react-router-dom";
 
 import { styles } from "../styles/styles";
@@ -11,19 +10,13 @@ export const LoginPage = () => {
 	const [password, setPasssword] = useState("");
 	const [redirect, setRedirect] = useState(false);
 
-	const disptch = useDispatch();
+	const dispatch = useDispatch();
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		try {
-			const { data } = await axios.post("/login", { email, password });
-			disptch(setUserAction(data));
-			alert("Login successful");
-			setRedirect(true);
-		} catch (e) {
-			alert("Login failed");
-		}
+		dispatch(loginUser({ email, password }));
+		setRedirect(true);
 	};
 
 	if (redirect) {

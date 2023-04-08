@@ -1,6 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { showAllPhotosAction } from "../../store/slices/placesSlice";
+
 import { ActionButtonComponent } from "../action-button";
 
-export const GalleryDetailComponent = ({ place, handleClick }) => {
+export const GalleryDetailComponent = () => {
+	const dispatch = useDispatch();
+	const { place } = useSelector((state) => state.placesReducer);
+
 	return (
 		<div className="absolute inset-0 bg-black min-h-screen">
 			<div className="bg-black">
@@ -9,7 +15,7 @@ export const GalleryDetailComponent = ({ place, handleClick }) => {
 						<ActionButtonComponent
 							icon="close"
 							text="Close"
-							handleClick={handleClick}
+							handleClick={() => dispatch(showAllPhotosAction(false))}
 						/>
 					</div>
 					<div className="fixed right-8 flex justify-end">

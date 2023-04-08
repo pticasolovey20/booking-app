@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPlaces } from "../store/slices/placesSlice";
 
-import { styles } from "../styles/styles";
-import { SvgSelectorComponent } from "../components/svg-selector";
 import { PlaceItemComponent } from "../components/place-item";
 
+import { styles } from "../styles/styles";
+
 export const HomePage = () => {
-	const [places, setPlaces] = useState([]);
+	const dispatch = useDispatch();
+	const { places } = useSelector((state) => state.placesReducer);
 
 	useEffect(() => {
-		axios.get("/places").then((response) => {
-			setPlaces(response.data);
-		});
+		dispatch(fetchAllPlaces());
 	}, []);
 
 	return (

@@ -26,7 +26,7 @@ export const HeaderComponent = () => {
 					<SvgSelectorComponent icon="menu" />
 				</button>
 				<Link
-					to="/account/profile"
+					to={Object.keys(user).length > 0 ? "/account/profile" : "/login"}
 					className="bg-gray-500 rounded-full border border-gray-500 overflow-hidden"
 				>
 					<SvgSelectorComponent icon="user" />

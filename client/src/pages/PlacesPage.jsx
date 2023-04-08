@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsersPlaces } from "../store/slices/placesSlice";
+
 import { Link } from "react-router-dom";
 
 import { SvgSelectorComponent } from "../components/svg-selector";
 
 export const PlacesPage = () => {
-	const [places, setPlaces] = useState([]);
+	const dispatch = useDispatch();
+	const { userPlaces } = useSelector((state) => state.placesReducer);
 
 	useEffect(() => {
-		axios.get("/user-places").then((response) => {
-			setPlaces(response.data);
-		});
+		dispatch(fetchUsersPlaces());
 	}, []);
 
 	return (
@@ -25,8 +26,8 @@ export const PlacesPage = () => {
 				</Link>
 			</div>
 			<div className="mt-4">
-				{places.length > 0 &&
-					places.map((place) => (
+				{userPlaces.length > 0 &&
+					userPlaces.map((place) => (
 						<Link
 							key={place._id}
 							to={"/account/places/" + place._id}

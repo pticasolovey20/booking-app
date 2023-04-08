@@ -1,6 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { showAllPhotosAction } from "../../store/slices/placesSlice";
+
 import { SvgSelectorComponent } from "../svg-selector";
 
-export const PlaceGalleryComponent = ({ place, handleClick }) => {
+export const PlaceGalleryComponent = () => {
+	const dispatch = useDispatch();
+	const { place } = useSelector((state) => state.placesReducer);
+
 	return (
 		<div className="relative">
 			<div className="grid grid-cols-2 gap-2">
@@ -41,7 +47,7 @@ export const PlaceGalleryComponent = ({ place, handleClick }) => {
 					)}
 				</div>
 				<button
-					onClick={handleClick}
+					onClick={() => dispatch(showAllPhotosAction(true))}
 					className="flex items-center gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-2xl opacity-75 text-black"
 				>
 					<SvgSelectorComponent icon="more" />
