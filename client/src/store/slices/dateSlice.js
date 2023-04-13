@@ -5,7 +5,7 @@ const today = startOfToday();
 
 const initialState = {
 	firstDate: today.getTime(),
-	secondDate: "--.--.----",
+	secondDate: null,
 	nights: 0,
 };
 

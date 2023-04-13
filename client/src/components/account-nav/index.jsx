@@ -7,7 +7,7 @@ import { styles } from "../../styles/styles";
 
 export const AccountNavComponent = () => {
 	return (
-		<nav className="w-full flex justify-center mt-8 gap-2 mb-8">
+		<nav className="w-full flex items-center justify-center mt-8 gap-2 mb-8">
 			{accountMenu.map((link) => (
 				<NavLink
 					key={link.id}
@@ -18,7 +18,7 @@ export const AccountNavComponent = () => {
 							: `${styles.button} inline-flex gap-1 bg-tertiary text-black`
 					}
 				>
-					<SvgSelectorComponent icon={link.id} />
+					<SvgSelectorComponent icon={link.id} h={24} w={24} />
 					{link.title}
 				</NavLink>
 			))}

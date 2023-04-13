@@ -388,7 +388,8 @@ export const SvgSelectorComponent = ({ icon, w, h }) => {
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-5 h-5"
+					height={h}
+					width={w}
 				>
 					<path
 						strokeLinecap="round"

@@ -1,6 +1,3 @@
-import { useDispatch } from "react-redux";
-import { setWidthAction } from "../../store/slices/widthSlice";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -11,17 +8,8 @@ import { ButtonComponent } from "../nav-button";
 import { bottomMenu, buttons } from "../../constants";
 
 export const HeaderComponent = () => {
-	const dispatch = useDispatch();
-
 	const { user } = useSelector((state) => state.userReducer);
 	const { width } = useSelector((state) => state.widthReducer);
-
-	useEffect(() => {
-		const handleResize = () => dispatch(setWidthAction(window.innerWidth));
-		window.addEventListener("resize", handleResize);
-
-		return () => window.removeEventListener("resize", handleResize);
-	}, [dispatch]);
 
 	if (width < 768) {
 		return (

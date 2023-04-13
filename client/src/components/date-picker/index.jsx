@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {
@@ -20,11 +20,15 @@ import { SvgSelectorComponent } from "../svg-selector";
 
 import { colStartClasses, weekDays } from "../../constants";
 
-export const DatePickerComponent = ({ setDate }) => {
+export const DatePickerComponent = ({
+	setDate,
+	selectedFirstDay,
+	selectedSecondDay,
+	setSelectedDay,
+}) => {
 	const today = startOfToday();
 	const dispatch = useDispatch();
 
-	const [selectedDay, setSelectedDay] = useState();
 	const [currentMonth, setCurrentMonth] = useState(format(today, "MMMM-yyyy"));
 
 	const firstDayCurrentMonth = parse(currentMonth, "MMMM-yyyy", new Date());
@@ -53,6 +57,7 @@ export const DatePickerComponent = ({ setDate }) => {
 			setSelectedDay(day);
 			dispatch(setDate(day.getTime()));
 		}
+
 		if (!isSameMonth(day, firstDayCurrentMonth) && day.getDate() > today.getDate()) {
 			previousMonth();
 		} else if (!isSameMonth(day, firstDayCurrentMonth) && day.getDate() < today.getDate()) {
@@ -61,7 +66,7 @@ export const DatePickerComponent = ({ setDate }) => {
 	};
 
 	return (
-		<div className="w-full flex justify-around flex-col gap-4 p-4 border border-gray-700 rounded-lg">
+		<div className="flex justify-around flex-col gap-4 p-4 border border-gray-900 rounded-lg shadow-black shadow-lg">
 			<div className="flex justify-between items-center">
 				<button onClick={previousMonth}>
 					<SvgSelectorComponent icon="left" />
@@ -73,9 +78,12 @@ export const DatePickerComponent = ({ setDate }) => {
 					<SvgSelectorComponent icon="right" />
 				</button>
 			</div>
-			<div className="grid grid-cols-7 gap-2">
+			<div className="grid grid-cols-7 gap-2 mt-2">
 				{weekDays.map((day, index) => (
-					<div key={index} className="text-center">
+					<div
+						key={index}
+						className="flex items-center justify-center px-2 py-1 border border-gray-800 rounded-2xl"
+					>
 						{day}
 					</div>
 				))}
@@ -89,29 +97,22 @@ export const DatePickerComponent = ({ setDate }) => {
 						<button
 							onClick={() => handleClick(day)}
 							className={classNames(
-								isEqual(day, selectedDay) && "text-white",
-								day.getTime() < today.getTime() && "hover:bg-gray-900",
-								day.getTime() < today.getTime() && "hover:border border-[#ff0000]",
-
-								!isEqual(day, selectedDay) &&
-									isToday(day) &&
-									"text-secondary hover:bg-gray-900",
-								!isEqual(day, selectedDay) &&
-									!isToday(day) &&
-									isSameMonth(day, firstDayCurrentMonth) &&
-									"text-white",
 								!isSameMonth(day, firstDayCurrentMonth) &&
-									day.getTime() > today.getTime() &&
-									"hover:bg-secondary hover:text-white",
-								!isEqual(day, selectedDay) &&
-									!isToday(day) &&
-									!isSameMonth(day, firstDayCurrentMonth) &&
-									"text-gray-600",
-								isEqual(day, selectedDay) && isToday(day) && "bg-secondary",
-								isEqual(day, selectedDay) && !isToday(day) && "bg-secondary",
-								!isEqual(day, selectedDay) && "hover:bg-secondary",
+									"text-gray-700 hover:text-white",
+								isToday(day) &&
+									"text-secondary hover:text-white hover:bg-secondary",
+								day.getTime() < today.getTime() && "hover:bg-gray-700",
+								day.getTime() > today.getTime() && "hover:transparent text-white",
+								!isSameMonth(day, firstDayCurrentMonth) && "hover:bg-gray-700",
 
-								"mx-auto flex h-8 w-8 items-center justify-center rounded-full text-lg"
+								isEqual(day, selectedFirstDay) &&
+									!isToday(day) &&
+									"bg-secondary hover:bg-secondary",
+								isEqual(day, selectedSecondDay) &&
+									!isToday(day) &&
+									"bg-[#2b79c2] hover:bg-[#2b79c2]",
+
+								"mx-auto flex h-10 w-10 items-center justify-center rounded-full text-lg"
 							)}
 						>
 							<time dateTime={format(day, "yyyy-MM-dd")}>{format(day, "d")}</time>
