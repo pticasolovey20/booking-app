@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./store/slices/userSlice";
+import { setWidthAction, setIsMobileAction } from "./store/slices/widthSlice";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
@@ -21,10 +22,22 @@ axios.defaults.withCredentials = true;
 
 export const App = () => {
 	const dispatch = useDispatch();
+	const { width } = useSelector((state) => state.widthReducer);
 
 	useEffect(() => {
 		dispatch(fetchUser());
 	}, []);
+
+	useEffect(() => {
+		const handleResize = () => dispatch(setWidthAction(window.innerWidth));
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, [dispatch]);
+
+	useEffect(() => {
+		width < 744 ? dispatch(setIsMobileAction(true)) : dispatch(setIsMobileAction(false));
+	}, [width]);
 
 	return (
 		<div className="bg-primary text-white">

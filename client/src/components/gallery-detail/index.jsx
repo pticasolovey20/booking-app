@@ -20,8 +20,8 @@ export const GalleryDetailComponent = () => {
 					</div>
 					<div className="fixed right-8 flex justify-end">
 						<div className="flex gap-4 items-center">
-							<ActionButtonComponent icon="share" text="Share" />
-							<ActionButtonComponent icon="heart" text="Save" />
+							<ActionButtonComponent icon="share" text="Share" h={24} w={24} />
+							<ActionButtonComponent icon="heart" text="Save" h={24} w={24} />
 						</div>
 					</div>
 					{place?.photos?.length > 0 &&

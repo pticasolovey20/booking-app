@@ -108,47 +108,23 @@ export const PlacesFormPage = () => {
 					/>
 				))}
 			</div>
-			<HeadlineComponent headText="Extra info" subText="house rules, etc" />
-			<textarea
-				className={styles.input}
-				value={extraInfo}
-				onChange={(event) => setExtraInfo(event.target.value)}
-			/>
-			<HeadlineComponent
-				headText="Check in/out times, max guests"
-				subText="add check in and out times, remember to have some time window for
-							cleaning the room beetwen guests"
-			/>
-			<div className="grid gap-2 sm:grid-cols-3">
-				<div>
-					<h3 className="mt-2 -mb-1">Check in time</h3>
-					<input
-						className={styles.input}
-						type="text"
-						placeholder="16:00"
-						value={chekIn}
-						onChange={(event) => setCheckIn(event.target.value)}
-					/>
-				</div>
-				<div>
-					<h3 className="mt-2 -mb-1">Check out time</h3>
-					<input
-						className={styles.input}
-						type="text"
-						placeholder="11"
-						value={chekOut}
-						onChange={(event) => setCheckOut(event.target.value)}
-					/>
-				</div>
-				<div>
-					<h3 className="mt-2 -mb-1">Max number of guests</h3>
-					<input
-						className={styles.input}
-						type="number"
-						value={maxGuests}
-						onChange={(event) => setMaxGuests(event.target.value)}
-					/>
-				</div>
+			<HeadlineComponent headText="Max guests" subText="the maximum number of guests" />
+			<div className="flex flex-col gap-4">
+				<input
+					className={styles.input}
+					type="number"
+					value={maxGuests}
+					onChange={(event) => setMaxGuests(event.target.value)}
+				/>
+			</div>
+			<HeadlineComponent headText="Price" subText="set the cost" />
+			<div className="flex flex-col gap-4">
+				<input
+					className={styles.input}
+					type="number"
+					value={1}
+					onChange={(event) => console.log(event.target.value)}
+				/>
 			</div>
 			<button className="bg-secondary my-4 w-full p-2 rounded-2xl">Save</button>
 		</form>
