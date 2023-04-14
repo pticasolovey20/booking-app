@@ -4,9 +4,12 @@ import { startOfToday } from "date-fns";
 const today = startOfToday();
 
 const initialState = {
-	firstDate: today.getTime(),
-	secondDate: null,
+	checkIn: today.getTime(),
+	checkOut: null,
 	nights: 0,
+	name: "",
+	phone: "",
+	maxGuests: 1,
 };
 
 const dateSlice = createSlice({
@@ -14,16 +17,32 @@ const dateSlice = createSlice({
 	initialState,
 	reducers: {
 		setFromDateAction(state, action) {
-			state.firstDate = action.payload;
+			state.checkIn = action.payload;
 		},
 		setToDateAction(state, action) {
-			state.secondDate = action.payload;
+			state.checkOut = action.payload;
 		},
 		setNightsAction(state, action) {
 			state.nights = action.payload;
 		},
+		setNameAction(state, action) {
+			state.name = action.payload;
+		},
+		setPhoneAction(state, action) {
+			state.phone = action.payload;
+		},
+		setMaxGuestsAction(state, action) {
+			state.maxGuests = action.payload;
+		},
 	},
 });
 
-export const { setFromDateAction, setToDateAction, setNightsAction } = dateSlice.actions;
+export const {
+	setFromDateAction,
+	setToDateAction,
+	setNightsAction,
+	setNameAction,
+	setPhoneAction,
+	setMaxGuestsAction,
+} = dateSlice.actions;
 export default dateSlice.reducer;

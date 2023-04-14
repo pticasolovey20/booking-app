@@ -11,3 +11,7 @@ export const generateRandomNumber = (string) => {
 
 	return randomNumber;
 };
+
+export const classNames = (...classes) => {
+	return classes.filter(Boolean).join(" ");
+};

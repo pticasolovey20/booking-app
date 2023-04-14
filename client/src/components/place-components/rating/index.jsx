@@ -1,4 +1,4 @@
-import { SvgSelectorComponent } from "../svg-selector";
+import { SvgSelectorComponent } from "../../svg-selector";
 
 export const RatingComponent = () => {
 	return (

@@ -72,3 +72,10 @@ export const colStartClasses = [
 	"col-start-6",
 	"col-start-7",
 ];
+
+export const imageClasses = [
+	"aspect-square object-cover",
+	"aspect-square object-cover rounded-se-2xl",
+	"aspect-square object-cover",
+	"aspect-square object-cover rounded-br-2xl",
+];

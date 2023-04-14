@@ -1,3 +1,7 @@
+import { useParams } from "react-router-dom";
+
 export const BookingPage = () => {
-	return <div>BookingPage</div>;
+	const { id } = useParams();
+
+	return <div>{id}</div>;
 };

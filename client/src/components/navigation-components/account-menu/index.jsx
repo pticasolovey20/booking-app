@@ -1,13 +1,16 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import { SvgSelectorComponent } from "../svg-selector";
+import { SvgSelectorComponent } from "../../svg-selector";
 
-import { accountMenu } from "../../constants";
-import { styles } from "../../styles/styles";
+import { accountMenu } from "../../../constants";
+import { styles } from "../../../styles/styles";
 
-export const AccountNavComponent = () => {
+export const AccountMenuComponent = () => {
+	const { isMobile } = useSelector((state) => state.widthReducer);
+
 	return (
-		<nav className="w-full flex items-center justify-center mt-8 gap-2 mb-8">
+		<nav className="flex justify-center gap-2 my-6">
 			{accountMenu.map((link) => (
 				<NavLink
 					key={link.id}
@@ -19,7 +22,7 @@ export const AccountNavComponent = () => {
 					}
 				>
 					<SvgSelectorComponent icon={link.id} h={24} w={24} />
-					{link.title}
+					{!isMobile && link.title}
 				</NavLink>
 			))}
 		</nav>

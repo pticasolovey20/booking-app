@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import {
 	add,
 	eachDayOfInterval,
@@ -19,6 +18,7 @@ import {
 import { SvgSelectorComponent } from "../svg-selector";
 
 import { colStartClasses, weekDays } from "../../constants";
+import { classNames } from "../../utils";
 
 export const DatePickerComponent = ({
 	setDate,
@@ -37,10 +37,6 @@ export const DatePickerComponent = ({
 		start: startOfWeek(firstDayCurrentMonth),
 		end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
 	});
-
-	const classNames = (...classes) => {
-		return classes.filter(Boolean).join(" ");
-	};
 
 	const previousMonth = () => {
 		const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
@@ -66,8 +62,8 @@ export const DatePickerComponent = ({
 	};
 
 	return (
-		<div className="flex justify-around flex-col gap-4 p-4 border border-gray-900 rounded-lg shadow-black shadow-lg">
-			<div className="flex justify-between items-center">
+		<div className="flex justify-around flex-col gap-2 p-2 border border-gray-900 rounded-lg shadow-black shadow-lg">
+			<div className="flex justify-between items-center mt-2">
 				<button onClick={previousMonth}>
 					<SvgSelectorComponent icon="left" />
 				</button>
@@ -78,7 +74,7 @@ export const DatePickerComponent = ({
 					<SvgSelectorComponent icon="right" />
 				</button>
 			</div>
-			<div className="grid grid-cols-7 gap-2 mt-2">
+			<div className="grid grid-cols-7 gap-2 py-4">
 				{weekDays.map((day, index) => (
 					<div
 						key={index}
@@ -88,7 +84,7 @@ export const DatePickerComponent = ({
 					</div>
 				))}
 			</div>
-			<div className="grid grid-cols-7 gap-2 mt-2">
+			<div className="grid grid-cols-7 gap-2">
 				{days.map((day, index) => (
 					<div
 						key={day.toString()}

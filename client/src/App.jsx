@@ -5,13 +5,13 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
-import { LayoutComponent } from "./components/layout/Layout";
-import { AccLayoutComponent } from "./components/layout/AccLayout";
+import { LayoutComponent, AccountLayoutComponent } from "./components/layout-components";
 
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ProfilePage } from "./pages/ProfilePage";
+import { BookingsPage } from "./pages/BookingsPage";
 import { BookingPage } from "./pages/BookingPage";
 import { PlacesPage } from "./pages/PlacesPage";
 import { PlacesFormPage } from "./pages/PlacesFormPage";
@@ -46,9 +46,10 @@ export const App = () => {
 					<Route index element={<HomePage />} />
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/register" element={<RegisterPage />} />
-					<Route path="/account" element={<AccLayoutComponent />}>
+					<Route path="/account" element={<AccountLayoutComponent />}>
 						<Route path="/account/profile" element={<ProfilePage />} />
-						<Route path="/account/bookings" element={<BookingPage />} />
+						<Route path="/account/bookings" element={<BookingsPage />} />
+						<Route path="/account/bookings/:id" element={<BookingPage />} />
 						<Route path="/account/places" element={<PlacesPage />} />
 						<Route path="/account/places/new" element={<PlacesFormPage />} />
 						<Route path="/account/places/:id" element={<PlacesFormPage />} />

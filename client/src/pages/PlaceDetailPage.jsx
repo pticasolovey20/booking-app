@@ -4,15 +4,16 @@ import { setFromDateAction, setToDateAction } from "../store/slices/dateSlice";
 import { fetchPlaceById } from "../store/slices/placesSlice";
 import { useParams, Link } from "react-router-dom";
 
-import { GalleryDetailComponent } from "../components/gallery-detail";
-import { PlaceGalleryComponent } from "../components/place-gallery";
-import { RatingComponent } from "../components/rating";
+import { GalleryDetailComponent } from "../components/place-components/gallery-detail";
+import { PlaceGalleryComponent } from "../components/place-components/place-gallery";
+import { PlaceImageComponent } from "../components/place-components/place-image";
+import { RatingComponent } from "../components/place-components/rating";
 import { SvgSelectorComponent } from "../components/svg-selector";
-import { ActionButtonComponent } from "../components/action-button";
+import { ActionButtonComponent } from "../components/navigation-components/buttons";
 import { BookingWidgetComponent } from "../components/booking-widget";
 import { DatePickerComponent } from "../components/date-picker";
 
-import { generateRandomNumber } from "../utils/randomNumber";
+import { generateRandomNumber } from "../utils";
 
 export const PlaceDetailPage = () => {
 	const [selectedFirstDay, setSelectedFirstDay] = useState(null);
@@ -58,12 +59,7 @@ export const PlaceDetailPage = () => {
 							</div>
 						</div>
 						{place.photos?.[0] && (
-							<div>
-								<img
-									className="object-cover"
-									src={"http://localhost:4000/uploads/" + place.photos[0]}
-								/>
-							</div>
+							<PlaceImageComponent place={place} className="object-cover" />
 						)}
 					</div>
 				)}
@@ -119,11 +115,7 @@ export const PlaceDetailPage = () => {
 											</div>
 										))}
 								</div>
-								<button
-									className={`w-1/${
-										width > 743 && width < 1052 ? 2 : 3
-									} border border-gray-400 rounded-lg py-2 px-2 text-white`}
-								>
+								<button className="w-1/2 border border-gray-400 rounded-lg py-2 px-2 text-white">
 									Show all facilities
 								</button>
 							</div>
