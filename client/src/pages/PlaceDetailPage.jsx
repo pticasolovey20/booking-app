@@ -21,7 +21,7 @@ export const PlaceDetailPage = () => {
 
 	const dispatch = useDispatch();
 	const { place, showAllPhotos } = useSelector((state) => state.placesReducer);
-	const { width, isMobile } = useSelector((state) => state.widthReducer);
+	const { width, isMobile } = useSelector((state) => state.appReducer);
 
 	const { id } = useParams();
 
@@ -76,7 +76,7 @@ export const PlaceDetailPage = () => {
 							<RatingComponent />
 							<p>{generateRandomNumber("tens")} reviews</p>
 							<div className="flex gap-1 items-center">
-								<SvgSelectorComponent icon="pined" />
+								<SvgSelectorComponent icon="pined" w={16} h={16} />
 								Superhost
 							</div>
 							<a className="my-2 block font-semibold underline">{place.address}</a>
@@ -110,7 +110,7 @@ export const PlaceDetailPage = () => {
 									{place?.perks?.length > 0 &&
 										place.perks.map((perk) => (
 											<div key={perk} className="w-[49%] flex gap-2">
-												<SvgSelectorComponent icon={perk} />
+												<SvgSelectorComponent icon={perk} h={20} w={20} />
 												<h2>{perk}</h2>
 											</div>
 										))}

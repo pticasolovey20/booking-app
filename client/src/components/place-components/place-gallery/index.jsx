@@ -44,7 +44,7 @@ export const PlaceGalleryComponent = () => {
 						onClick={() => dispatch(showAllPhotosAction(true))}
 						className="flex items-center gap-1 absolute bottom-4 right-2 py-2 px-4 bg-white rounded-2xl opacity-75 text-black"
 					>
-						<SvgSelectorComponent icon="more" />
+						<SvgSelectorComponent icon="more" w={24} h={24} />
 						Show more photos
 					</button>
 				</div>

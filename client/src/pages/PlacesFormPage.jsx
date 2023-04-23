@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+import { MarkupFormComponent } from "../components/markup-components";
 import { HeadlineComponent } from "../components/headline";
 import { ImageLinkComponent } from "../components/image-link";
 import { ImageDescComponent } from "../components/image-desc";
@@ -9,9 +10,11 @@ import { PerkComponent } from "../components/perk";
 
 import { perksList } from "../constants";
 import { styles } from "../styles/styles";
+import { useSelector } from "react-redux";
 
 export const PlacesFormPage = () => {
 	const { id } = useParams();
+	const { isMobile } = useSelector((state) => state.appReducer);
 
 	const [title, setTitle] = useState("");
 	const [address, setAddress] = useState("");
@@ -66,55 +69,77 @@ export const PlacesFormPage = () => {
 	}
 
 	return (
-		<form className="text-black" onSubmit={savePlace}>
-			<HeadlineComponent
-				headText="Title"
-				subText="Title for your place. should be short and catchy as in advertisemen"
-			/>
-			<input
-				className={styles.input}
-				type="text"
-				placeholder="title, for example: My lovely apt"
-				value={title}
-				onChange={(event) => setTitle(event.target.value)}
-			/>
-			<HeadlineComponent headText="Address" subText="Address to this place" />
-			<input
-				className={styles.input}
-				type="text"
-				placeholder="address"
-				value={address}
-				onChange={(event) => setAddress(event.target.value)}
-			/>
-			<ImageLinkComponent setAddedPhotos={setAddedPhotos} />
-			<ImageDescComponent addedPhotos={addedPhotos} setAddedPhotos={setAddedPhotos} />
-			<HeadlineComponent headText="Description" subText="description of the place" />
-			<textarea
-				className={styles.input}
-				value={description}
-				onChange={(event) => setDescription(event.target.value)}
-			/>
-			<HeadlineComponent headText="Perks" subText="select all the perks of your place" />
-			<div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols:6">
-				{perksList.map((perkItem) => (
-					<PerkComponent
-						key={perkItem.id}
-						perk={perkItem}
-						selected={perks}
-						onChange={setPerks}
-					/>
-				))}
-			</div>
-			<HeadlineComponent headText="Price" subText="set the cost" />
-			<div className="flex flex-col gap-4">
+		<form className="flex flex-col p-4 gap-4 rounded-md overflow-hidden">
+			<MarkupFormComponent>
+				<HeadlineComponent headText="Title" />
 				<input
 					className={styles.input}
-					type="number"
-					value={price}
-					onChange={(event) => setPrice(event.target.value)}
+					style={{
+						boxShadow: "inset 4px 8px 15px rgba(0, 0, 0, 0.4)",
+					}}
+					type="text"
+					placeholder="for example: My lovely apt"
+					value={title}
+					onChange={(event) => setTitle(event.target.value)}
 				/>
-			</div>
-			<button className="bg-secondary my-4 w-full p-2 rounded-2xl">Save</button>
+			</MarkupFormComponent>
+			<MarkupFormComponent>
+				<HeadlineComponent headText="Address" />
+				<input
+					className={styles.input}
+					style={{
+						boxShadow: "inset 4px 8px 15px rgba(0, 0, 0, 0.4)",
+					}}
+					type="text"
+					placeholder="address"
+					value={address}
+					onChange={(event) => setAddress(event.target.value)}
+				/>
+			</MarkupFormComponent>
+			<MarkupFormComponent>
+				<HeadlineComponent headText="add your photos" />
+				<ImageDescComponent addedPhotos={addedPhotos} setAddedPhotos={setAddedPhotos} />
+				<ImageLinkComponent setAddedPhotos={setAddedPhotos} />
+			</MarkupFormComponent>
+			<MarkupFormComponent>
+				<HeadlineComponent headText="Select all the perks of your place" />
+				<div className="grid mt-2 gap-4 grid-cols-2">
+					{perksList.map((perkItem) => (
+						<PerkComponent
+							key={perkItem}
+							perk={perkItem}
+							selected={perks}
+							onChange={setPerks}
+						/>
+					))}
+				</div>
+			</MarkupFormComponent>
+			<MarkupFormComponent>
+				<HeadlineComponent headText="Description" />
+				<textarea
+					className={styles.input}
+					style={{
+						boxShadow: "inset 4px 8px 15px rgba(0, 0, 0, 0.4)",
+					}}
+					value={description}
+					onChange={(event) => setDescription(event.target.value)}
+				/>
+			</MarkupFormComponent>
+			<MarkupFormComponent>
+				<HeadlineComponent headText="Price" subText="set the cost" />
+				<div className="flex flex-col gap-4">
+					<input
+						className={styles.input}
+						style={{
+							boxShadow: "inset 4px 8px 15px rgba(0, 0, 0, 0.4)",
+						}}
+						type="number"
+						value={price}
+						onChange={(event) => setPrice(event.target.value)}
+					/>
+				</div>
+			</MarkupFormComponent>
+			<button className="uppercase w-full p-2 my-4 rounded-lg bg-secondary">Save</button>
 		</form>
 	);
 };

@@ -8,8 +8,9 @@ import { styles } from "../styles/styles";
 
 export const HomePage = () => {
 	const dispatch = useDispatch();
+
 	const { places } = useSelector((state) => state.placesReducer);
-	const { isMobile } = useSelector((state) => state.widthReducer);
+	const { isMobile } = useSelector((state) => state.appReducer);
 
 	useEffect(() => {
 		dispatch(fetchAllPlaces());

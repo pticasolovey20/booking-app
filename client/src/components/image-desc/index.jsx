@@ -1,6 +1,9 @@
 import axios from "axios";
 
+import { PlaceImageComponent } from "../place-components/place-image";
 import { SvgSelectorComponent } from "../svg-selector";
+
+import { styles } from "../../styles/styles";
 
 export const ImageDescComponent = ({ addedPhotos, setAddedPhotos }) => {
 	const uploadPhoto = async (event) => {
@@ -30,37 +33,36 @@ export const ImageDescComponent = ({ addedPhotos, setAddedPhotos }) => {
 	};
 
 	return (
-		<div className="mt-2 grid gap-2 grid-cols-3 lg:grid-cols:6 md:grid-cols-4">
+		<div className="grid gap-3 grid-cols-3 grid-flow-row grid-auto-rows-auto">
 			{addedPhotos.length > 0 &&
 				addedPhotos.map((link, index) => (
-					<div className="h-32 flex relative" key={index}>
-						<img
-							className="rounded-2xl w-full object-cover"
-							src={"http://localhost:4000/uploads/" + link}
-							alt=""
+					<div className="flex relative" key={index}>
+						<PlaceImageComponent
+							photo={link}
+							className="w-full aspect-video object-cover rounded-lg shadow-2xl shadow-black"
 						/>
 						<button
 							onClick={(event) => removePhoto(event, link)}
-							className="cursor-pointer absolute bottom-1 right-1 text-white bg-black bg-opacity-50 rounded-2xl py-2 px-3"
+							className={`${styles.photoAction} bottom-1 right-1`}
 						>
-							<SvgSelectorComponent icon="delete" />
+							<SvgSelectorComponent icon="delete" h={20} w={20} />
 						</button>
 						<button
 							onClick={(event) => selectAsMainPhoto(event, link)}
-							className="cursor-pointer absolute bottom-1 left-1 text-white bg-black bg-opacity-50 rounded-2xl py-2 px-3"
+							className={`${styles.photoAction} bottom-1 left-1`}
 						>
 							{link === addedPhotos[0] ? (
-								<SvgSelectorComponent icon="star-fill" />
+								<SvgSelectorComponent icon="star-fill" h={20} w={20} />
 							) : (
-								<SvgSelectorComponent icon="star" />
+								<SvgSelectorComponent icon="star" h={20} w={20} />
 							)}
 						</button>
 					</div>
 				))}
-			<label className="h-32 cursor-pointer flex items-center gap-1 justify-center border rounded-2xl p-2 text-2xl">
+			<label className={styles.upload}>
 				<input className="hidden" type="file" multiple onChange={uploadPhoto} />
-				<SvgSelectorComponent icon="upload" />
-				Upload
+				<SvgSelectorComponent icon="upload" h={32} w={32} />
+				upload
 			</label>
 		</div>
 	);

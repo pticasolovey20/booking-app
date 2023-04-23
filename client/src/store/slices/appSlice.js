@@ -5,8 +5,8 @@ const initialState = {
 	isMobile: false,
 };
 
-const widthSlice = createSlice({
-	name: "width",
+const appSlice = createSlice({
+	name: "app",
 	initialState,
 	reducers: {
 		setWidthAction(state, action) {
@@ -18,5 +18,5 @@ const widthSlice = createSlice({
 	},
 });
 
-export const { setWidthAction, setIsMobileAction } = widthSlice.actions;
-export default widthSlice.reducer;
+export const { setWidthAction, setIsMobileAction } = appSlice.actions;
+export default appSlice.reducer;

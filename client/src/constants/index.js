@@ -1,48 +1,22 @@
 export const buttons = ["Anywhere", "Any week", "Add guests", "search"];
 
 export const accountMenu = [
-	{
-		id: "profile",
-		title: "My profile",
-	},
-	{
-		id: "bookings",
-		title: "My bookings",
-	},
-	{
-		id: "places",
-		title: "My accommodations",
-	},
+	{ id: 1, icon: "home", route: "/", label: "Home" },
+	{ id: 2, icon: "profile", route: "/profile", label: "Profile" },
+	{ id: 3, icon: "travels", route: "/bookings", label: "Bookings" },
+	{ id: 4, icon: "places", route: "/places", label: "My accommodations" },
+	{ id: 5, icon: "settings", route: "/settings", label: "Settings" },
 ];
 
-export const bottomMenu = ["search", "heart", "heart", "message", "profile"];
-
-export const perksList = [
-	{
-		id: "wi-fi",
-		title: "Wi-Fi",
-	},
-	{
-		id: "parking",
-		title: "Free parking spot",
-	},
-	{
-		id: "tv",
-		title: "TV",
-	},
-	{
-		id: "radio",
-		title: "Radio",
-	},
-	{
-		id: "pets",
-		title: "Pets",
-	},
-	{
-		id: "entrance",
-		title: "Private entrance",
-	},
+export const bottomMenu = [
+	{ id: 1, icon: "search", route: "/" },
+	{ id: 2, icon: "travels", route: "/bookings" },
+	{ id: 3, icon: "plus", route: "/places/new" },
+	{ id: 4, icon: "message", route: "/message" },
+	{ id: 5, icon: "profile", route: "/profile" },
 ];
+
+export const perksList = ["wi-fi", "parking", "tv", "radio", "pets", "entrance"];
 
 export const month = [
 	"January ",

@@ -6,11 +6,12 @@ import { fetchUsersPlaces } from "../store/slices/placesSlice";
 import { MarkupPageComponent } from "../components/markup-components";
 import { SvgSelectorComponent } from "../components/svg-selector";
 import { HostPlaceItemComponent } from "../components/place-components/host-place-item";
+import { styles } from "../styles/styles";
 
 export const PlacesPage = () => {
 	const dispatch = useDispatch();
 	const { userPlaces } = useSelector((state) => state.placesReducer);
-	const { isMobile } = useSelector((state) => state.widthReducer);
+	const { isMobile } = useSelector((state) => state.appReducer);
 
 	useEffect(() => {
 		dispatch(fetchUsersPlaces());
@@ -18,19 +19,16 @@ export const PlacesPage = () => {
 
 	return (
 		<MarkupPageComponent>
-			<div
-				className={`${
-					isMobile && "justify-start"
-				} fixed bottom-3 right-3 flex justify-center`}
-			>
-				<Link
-					to={"/account/places/new"}
-					className="inline-flex gap-2 text-white py-2 px-6 bg-secondary rounded-lg"
-				>
-					<SvgSelectorComponent icon="plus" />
-					Add new place
-				</Link>
-			</div>
+			{!isMobile && (
+				<div className="fixed bottom-5 right-5 flex justify-center z-20">
+					<Link
+						to={"/account/places/new"}
+						className="flex gap-2 text-white p-3 bg-secondary border-2 border-primary rounded-full shadow-lg shadow-secondary"
+					>
+						<SvgSelectorComponent icon="plus" h={25} w={25} />
+					</Link>
+				</div>
+			)}
 			<div className="flex flex-col gap-4">
 				{userPlaces.length > 0 &&
 					userPlaces.map((place) => (

@@ -5,12 +5,12 @@ export const TopButtonComponent = ({ buttons, button, index }) => {
 		<button
 			className={
 				index === buttons.length - 1
-					? "p-1 rounded-full bg-secondary whitespace-nowrap"
-					: "px-2 border-r border-gray-300 whitespace-nowrap"
+					? "ml-3 p-1 rounded-full whitespace-nowrap text-white bg-pink-100"
+					: "px-3 border-r-2 border-black border-opacity-50 whitespace-nowrap"
 			}
 		>
 			{index === buttons.length - 1 ? (
-				<SvgSelectorComponent icon={button} h={20} w={20} />
+				<SvgSelectorComponent icon={button} h={20} w={20} strokeWidth={2.5} />
 			) : (
 				button
 			)}
@@ -18,9 +18,9 @@ export const TopButtonComponent = ({ buttons, button, index }) => {
 	);
 };
 
-export const ActionButtonComponent = ({ icon, h, w, text, handleClick }) => {
+export const ActionButtonComponent = ({ icon, text, handleClick, h, w, className }) => {
 	return (
-		<button className="flex gap-1 items-center text-[20px]" onClick={handleClick}>
+		<button className={className} onClick={handleClick}>
 			<SvgSelectorComponent icon={icon} h={h} w={w} />
 			{text}
 		</button>

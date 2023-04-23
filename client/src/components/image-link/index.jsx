@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 
-import { styles } from "../../styles/styles";
-
 export const ImageLinkComponent = ({ setAddedPhotos }) => {
 	const [photoLink, setPhotoLink] = useState("");
 
@@ -16,17 +14,20 @@ export const ImageLinkComponent = ({ setAddedPhotos }) => {
 	};
 
 	return (
-		<div className="flex gap-2">
+		<div className="flex gap-4 mt-4">
 			<input
-				className={styles.input}
+				className="w-full py-2 px-3 text-white rounded-lg border-none outline-none bg-transparent"
+				style={{
+					boxShadow: "inset 4px 8px 15px rgba(0, 0, 0, 0.4)",
+				}}
 				type="text"
-				placeholder="Add using link ...jpeg"
+				placeholder="https://image...jpeg"
 				value={photoLink}
 				onChange={(event) => setPhotoLink(event.target.value)}
 			/>
 
-			<button className="bg-secondary px-4" onClick={addPhotoByLink}>
-				Add photo
+			<button className="px-4 rounded-lg bg-pink-100" onClick={addPhotoByLink}>
+				Add
 			</button>
 		</div>
 	);
