@@ -29,7 +29,11 @@ export const GalleryDetailComponent = () => {
 					</div>
 					{place?.photos?.length > 0 &&
 						place.photos.map((photo, index) => (
-							<PlaceImageComponent photo={photo} className="object-cover w-full" />
+							<PlaceImageComponent
+								key={index}
+								photo={photo}
+								className="object-cover w-full"
+							/>
 						))}
 				</div>
 			</div>

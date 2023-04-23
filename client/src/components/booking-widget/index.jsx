@@ -24,7 +24,7 @@ export const BookingWidgetComponent = () => {
 		(state) => state.dateReducer
 	);
 	const { place } = useSelector((state) => state.placesReducer);
-	const { width } = useSelector((state) => state.widthReducer);
+	const { width } = useSelector((state) => state.appReducer);
 
 	useEffect(() => {
 		if (typeof checkOut === "number") {
@@ -51,8 +51,8 @@ export const BookingWidgetComponent = () => {
 	}
 
 	return (
-		<div className="h-auto col-span-2">
-			<div className="sticky top-10 text-white p-6 rounded-2xl border border-gray-800 bg-[#0c1335] shadow-lg shadow-black">
+		<div className="h-auto col-span-2 shadow-lg">
+			<div className="shadow-lg overflow-hiddensticky top-10 text-white p-6 rounded-2xl border border-gray-800 bg-[#0c1335] shadow-lg shadow-black">
 				<div
 					className={`${width < 1023 && "flex-col gap-2"} flex justify-between ${
 						width > 1023 && "items-end"
